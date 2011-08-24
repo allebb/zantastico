@@ -9,5 +9,5 @@ Zantastico is an open-source package deployment tool which quickly and effecient
 
 Acknoledgements:
 ----------------
-Adam A. Flynn <adamaflynn@criticaldevelopment.net> - Zantastico uses his PHP XML parser, simpler than writing my own!
-Russell Skinner <kempo19b@yahoo.com> - Added a fancy javascript page loader, Hes a Javascript wiz and I didn't have the time to do it! - Cheers buddy!
+Adam A. Flynn <adamaflynn@criticaldevelopment.net> - Zantastico uses his PHP XML parser, faster than writing my own!
+Russell Skinner <kempo19b@yahoo.com> - Added a fancy javascript page loader, Hes a Javascript wiz, I didn't have the time to do it and he's a very helpful guy! - Cheers buddy!
