@@ -1,0 +1,9 @@
+ZANTASTICO - A Package deployment module for ZPanel
+===================================================
+Copyright (C) Bobby Allen (bobbyallen.uk@gmail.com), August 2011.
+
+Zantastico is a simple package deployment module for the ZPanel web hosting control panel. Admins can easily add additional packages to be deployed by simply ammending the XML package file and adding a package folder to the module's package repository. Its simple to use and saves internet bandwidth by not requiring the user to upload large web packages. It also redirects the user to the installer and sets file permissions for ease of use.
+
+Acknoledgements:
+	Adam A. Flynn <adamaflynn@criticaldevelopment.net> - Zantastico uses his PHP XML parser, simpler than writing my own!
+	Russell Skinner <kempo19b@yahoo.com> - Added a fancy javascript page loader, Hes a Javascript wiz and I didn't have the time to do it! - Cheers buddy!

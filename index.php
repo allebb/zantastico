@@ -2,8 +2,8 @@
 /**
 * ZANTASTICO
 * ========
-* Zantastico is a free module developed by Bobby Allen to deploy open-source web scripts to user hosting accounts on ZPanel.
-* Download Zantastico from: http://zantastico.sourceforge.net/
+* Zantastico is a free module (GPL) developed by Bobby Allen to deploy open-source web scripts to user hosting accounts on ZPanel.
+* For help and support please visit the ZPanel forums at: http://forums.zpanelcp.com/
 *
 */ 
 include('conf/zcnf.php');
@@ -64,13 +64,13 @@ $packages->Parse();
 			if($totaldomain < 1){
 				echo '<div class="zannouce">Domain error!</div><br><br>The domain does not exist, you must choose a domain to deploy to! Please <a href="javascript:history.back(1)">go back</a> and choose a domain!';
 			} elseif(file_exists($path_to_deploy)) {
-				echo '<div class="zannouce">Destination already exists!</div><br><br>Sorry, the deployment folder (<strong>' .$domain_path.'/'.$_POST['inFolder']. '</strong>) already exists, please <a href="javascript:history.back(1)">go back</a> and choose a new folder!';
+				echo '<div class="zannouce">Destination already exists!</div><br><br>Sorry, the deployment folder (<strong>' .$domain_path.'/'.strtolower($_POST['inFolder']). '</strong>) already exists, please <a href="javascript:history.back(1)">go back</a> and choose a new folder!';
 			} else {
 			// Create the new folder and chmod it and copy the package data to it!
 			rec_copy($path_to_deploy, $path_to_package);
 			// Redirect to the new installer
 			echo "
-			<div class=\"zannouce\">Your package is now ready!</div><br><br>Congratulations! <strong>" .$deploy_name. "</strong> has now been deployed! Click here to be taken to the <a href=\"http://" .$rowdomain['vh_name_vc']. "/" .$_POST['inFolder']. "\" target=\"_blank\">installer</a>!
+			<div class=\"zannouce\">Your package is now ready!</div><br><br>Congratulations! <strong>" .$deploy_name. "</strong> has now been deployed! Click here to be taken to the <a href=\"http://" .$rowdomain['vh_name_vc']. "/" .strtolower($_POST['inFolder']). "\" target=\"_blank\">installer</a>!
 			<br><br><p><a href=\"/index.php?c=advanced&p=zantastico\">Deploy another package</a></p>";
 			// Done!
 			}
@@ -222,13 +222,13 @@ $(document).ready(function(){
 <div id="processing_overlay" style="display:none;"> </div>
 
 <div id="processing_container" style="display:none;">
-	<h1 id="processing_title">Zantasctico Installer</h1>
+	<h1 id="processing_title">Zantastico is busy...</h1>
 		<div id="processing_content">
-			<div id="processing_message">Please wait while your package is being installed...<br/><br/><?php
+			<div id="processing_message">Please wait while Zantastico deploys your choosen script/application to your web hosting space...<br/><br/><?php
 if (strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) { ?>
-<marquee behavior="alternate" scrollamount="20"><img src="/modules/advanced/zantastico/images/ajax-loader3.gif" /></marquee>
+<marquee behavior="alternate" scrollamount="20"><img src="/modules/advanced/zantastico/images/ajax-loader.gif" /></marquee>
 <?php } else { ?>
-<img src="/modules/advanced/zantastico/images/ajax-loader3.gif" />
+<img src="/modules/advanced/zantastico/images/ajax-loader.gif" />
 <?php } ?>
 			</div>
 		</div>
