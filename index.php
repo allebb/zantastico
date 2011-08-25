@@ -203,7 +203,7 @@ position:relative;
         script = document.createElement('script');
         script.id = 'jQuery';
         script.type = 'text/javascript';
-        script.src = 'modules/admin/zantastico/lib/jquery.js';
+        script.src = 'modules/advanced/zantastico/lib/jquery.js';
         head.appendChild(script);
     }
 </script>
