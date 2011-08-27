@@ -47,11 +47,17 @@ if (isset($_POST['btDeploy'])) {
     // Get the full path to the users (without trailing slash!)
     $path_to_home = GetSystemOption('hosted_dir') . $useraccount['ac_user_vc'];
     // Lets get the domain details from the database!
-    $sql = "SELECT * FROM z_vhosts WHERE vh_name_vc='" . $_POST['inDomain'] . "' AND vh_deleted_ts IS NULL";
+    $sql = "SELECT * FROM z_vhosts WHERE vh_name_vc='" . $_POST['inDomain'] . "' AND vh_type_in <> 3 AND vh_deleted_ts IS NULL";
     $listdomain = DataExchange("r", $z_db_name, $sql);
     $rowdomain = mysql_fetch_assoc($listdomain);
     $totaldomain = mysql_num_rows($listdomain);
     $domain_path = $rowdomain['vh_directory_vc'];
+    if ($_POST['inFolder'] <> "/") {
+        $jump_installer = "/" . strtolower($_POST['inFolder']);
+    } else {
+        $jump_installer = "/";
+    }
+
     $path_to_deploy = $path_to_home . '/' . $domain_path . '/' . $_POST['inFolder'] . '';
     $path_to_package = GetSystemOption('zpanel_root') . 'modules/advanced/zantastico/packages/' . strtolower($deploy_name) . '/';
     // Check that the deployment folder does not already exist!
@@ -65,7 +71,7 @@ if (isset($_POST['btDeploy'])) {
         rec_copy($path_to_deploy, $path_to_package);
         // Redirect to the new installer
         echo "
-			<div class=\"zannouce\">Your package is now ready!</div><br><br>Congratulations! <strong>" . $deploy_name . "</strong> has now been deployed! Click here to be taken to the <a href=\"http://" . $rowdomain['vh_name_vc'] . "/" . strtolower($_POST['inFolder']) . "\" target=\"_blank\">installer</a>!
+			<div class=\"zannouce\">Your package is now ready!</div><br><br>Congratulations! <strong>" . $deploy_name . "</strong> has now been deployed! Click here to be taken to the <a href=\"http://" . $rowdomain['vh_name_vc'] . $jump_installer . "\" target=\"_blank\">installer</a>!
 			<br><br><p><a href=\"/index.php?c=advanced&p=zantastico\">Deploy another package</a></p>";
         // Done!
     }
@@ -78,7 +84,7 @@ if (isset($_POST['btDeploy'])) {
         }
     }
     // Display the deployment form!
-    $sql = "SELECT * FROM z_vhosts WHERE vh_acc_fk=" . $useraccount['ac_id_pk'] . " AND vh_deleted_ts IS NULL";
+    $sql = "SELECT * FROM z_vhosts WHERE vh_acc_fk=" . $useraccount['ac_id_pk'] . " AND vh_type_in <> 3 AND vh_deleted_ts IS NULL";
     $listdomains = DataExchange("r", $z_db_name, $sql);
     $rowdomains = mysql_fetch_assoc($listdomains);
     $totaldomains = DataExchange("t", $z_db_name, $sql);
@@ -94,7 +100,7 @@ if (isset($_POST['btDeploy'])) {
 					  <td><label for=\"inDomain\"></label>
 						<select name=\"inDomain\" id=\"inDomain\">
 						";
-        // Get all the domains and list them!
+        // Get all the domains and list them (except 'parked' domains)!
         do {
             echo "<option value=\"" . $rowdomains['vh_name_vc'] . "\">" . $rowdomains['vh_name_vc'] . "</option>";
         } while ($rowdomains = mysql_fetch_assoc($listdomains));
