@@ -1,0 +1,5 @@
+CHANGELOG
+
+v5.0.1 - Released 27/08/2001
+    * Added the ability to deploy packages to the root of a domain home directory by the user specifying '/'.
+    * Displayed the actual package name on the Javascript 'processing window'.

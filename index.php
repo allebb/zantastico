@@ -59,6 +59,7 @@ if (isset($_POST['btDeploy'])) {
         echo '<div class="zannouce">Domain error!</div><br><br>The domain does not exist, you must choose a domain to deploy to! Please <a href="javascript:history.back(1)">go back</a> and choose a domain!';
     } elseif ((file_exists($path_to_deploy)) && ($_POST['inFolder'] <> "/")) {
         echo '<div class="zannouce">Destination already exists!</div><br><br>Sorry, the deployment folder (<strong>' . $domain_path . '/' . strtolower($_POST['inFolder']) . '</strong>) already exists, please <a href="javascript:history.back(1)">go back</a> and choose a new folder!';
+        $_POST['inFolder'] = ""; // Reset this to ensure install path does not get a double trailing slash after deployment!        
     } else {
         // Create the new folder and chmod it and copy the package data to it!
         rec_copy($path_to_deploy, $path_to_package);
@@ -216,7 +217,7 @@ if (isset($_POST['btDeploy'])) {
 <div id="processing_container" style="display:none;">
     <h1 id="processing_title">Zantastico is busy...</h1>
     <div id="processing_content">
-        <div id="processing_message">Please wait while Zantastico deploys your choosen script/application to your web hosting space...<br/><br/><?php if (strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) { ?>
+        <div id="processing_message">Please wait while Zantastico deploys <strong><?php echo $_GET['pkg']; ?></strong> to your web hosting space...<br/><br/><?php if (strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) { ?>
                 <marquee behavior="alternate" scrollamount="20"><img src="/modules/advanced/zantastico/images/ajax-loader.gif" /></marquee>
             <?php } else { ?>
                 <img src="/modules/advanced/zantastico/images/ajax-loader.gif" />
