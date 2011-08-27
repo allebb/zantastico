@@ -57,7 +57,7 @@ if (isset($_POST['btDeploy'])) {
     // Check that the deployment folder does not already exist!
     if ($totaldomain < 1) {
         echo '<div class="zannouce">Domain error!</div><br><br>The domain does not exist, you must choose a domain to deploy to! Please <a href="javascript:history.back(1)">go back</a> and choose a domain!';
-    } elseif (file_exists($path_to_deploy)) {
+    } elseif ((file_exists($path_to_deploy)) && ($_POST['inFolder'] <> "/")) {
         echo '<div class="zannouce">Destination already exists!</div><br><br>Sorry, the deployment folder (<strong>' . $domain_path . '/' . strtolower($_POST['inFolder']) . '</strong>) already exists, please <a href="javascript:history.back(1)">go back</a> and choose a new folder!';
     } else {
         // Create the new folder and chmod it and copy the package data to it!
